@@ -1,4 +1,4 @@
-# CygwinLauncher Eclise Plugin
+# CygwinLauncher Eclipse Plugin
 
 This plugin extends Eclipse to:
 
