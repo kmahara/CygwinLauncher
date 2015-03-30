@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="jp.trasis.eclipse.plugin.cygwinlauncher.feature"
+      label="CygwinLauncherFeature"
+      version="1.0.1.qualifier"
+      provider-name="Trasis, Inc."
+      plugin="CygwinLauncherPlugin"
+      os="win32">
+
+   <license url="">
+      
+   </license>
+
+   <url>
+      <update label="CygwinLauncher Update Site" url="http://center.trasis.jp/eclipse/CygwinLauncher/updates"/>
+   </url>
+
+   <plugin
+         id="CygwinLauncherPlugin"
+         download-size="0"
+         install-size="0"
+         version="1.0.1.qualifier"
+         unpack="false"/>
+
+</feature>

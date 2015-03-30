@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.visibleWhen">
+         <count value="1" />
+         <with variable="selection">
+            <iterate>
+               <adapt type="org.eclipse.core.resources.IResource" />
+            </iterate>
+         </with>
+      </definition>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Cygwin Launcher"
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.category">
+      </category>
+      <command
+            name="Open folder in Cygwin"
+            categoryId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.category"
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder">
+      </command>
+      <command
+            name="Run in Cygwin"
+            categoryId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.category"
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.run">
+      </command>
+      <command
+            name="Run project command in Cygwin"
+            categoryId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.category"
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder"
+            class="jp.trasis.eclipse.plugin.cygwinlauncher.handlers.OpenFolderHandler">
+      </handler>
+      <handler
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.run"
+            class="jp.trasis.eclipse.plugin.cygwinlauncher.handlers.RunHandler">
+      </handler>
+      <handler
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject"
+            class="jp.trasis.eclipse.plugin.cygwinlauncher.handlers.RunProjectHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+4"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.run"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+5"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+3"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+            <command
+                  commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject"
+	              enablesFor="1"
+               	  icon="icons/cygwin.png"
+                  id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject">
+                  <visibleWhen>
+               		<reference definitionId="jp.trasis.eclipse.plugin.cygwinlauncher.visibleWhen" />
+            	  </visibleWhen>
+            </command>
+          <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
+            <command
+                  commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder"
+	              enablesFor="1"
+               	  icon="icons/cygwin.png"
+                  id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder">
+                  <visibleWhen>
+               		<reference definitionId="jp.trasis.eclipse.plugin.cygwinlauncher.visibleWhen" />
+            	  </visibleWhen>
+            </command>
+            <command
+                  commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.run"
+	              enablesFor="1"
+               	  icon="icons/cygwin.png"
+                  id="jp.trasis.eclipse.plugin.cygwinlauncher.commands.run">
+                  <visibleWhen>
+               		<reference definitionId="jp.trasis.eclipse.plugin.cygwinlauncher.visibleWhen" />
+            	  </visibleWhen>
+            </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="jp.trasis.eclipse.plugin.cygwinlauncher.PreferenceInitializer">
+         </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="jp.trasis.eclipse.plugin.cygwinlauncher.PreferencePageImpl"
+            id="jp.trasis.eclipse.plugin.cygwinlauncher.PreferencePage"
+            name="CygwinLauncher">
+      </page>
+   </extension>
+</plugin>
