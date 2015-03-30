@@ -3,7 +3,7 @@
    <description name="CygwinLauncher Update Site" url="http://center.trasis.jp/eclipse/CygwinLauncher/updates">
       CygwinLauncher
    </description>
-   <feature url="features/jp.trasis.eclipse.plugin.cygwinlauncher.feature_1.0.1.201503301117.jar" id="jp.trasis.eclipse.plugin.cygwinlauncher.feature" version="1.0.1.201503301117" os="win32">
+   <feature url="features/jp.trasis.eclipse.plugin.cygwinlauncher.feature_1.0.1.qualifier.jar" id="jp.trasis.eclipse.plugin.cygwinlauncher.feature" version="1.0.1.qualifier" os="win32">
       <category name="CygwinLauncher"/>
    </feature>
    <category-def name="CygwinLauncher" label="CygwinLauncher">
