@@ -73,6 +73,8 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
+          <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
             <command
                   commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.runProject"
 	              enablesFor="1"
@@ -82,8 +84,6 @@
                		<reference definitionId="jp.trasis.eclipse.plugin.cygwinlauncher.visibleWhen" />
             	  </visibleWhen>
             </command>
-          <menuContribution
-            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
             <command
                   commandId="jp.trasis.eclipse.plugin.cygwinlauncher.commands.openFolder"
 	              enablesFor="1"
