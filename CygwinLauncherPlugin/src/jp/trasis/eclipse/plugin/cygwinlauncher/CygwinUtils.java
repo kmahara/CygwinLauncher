@@ -18,6 +18,7 @@ import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
 import org.eclipse.debug.ui.console.ConsoleColorProvider;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -195,6 +196,14 @@ public final class CygwinUtils {
 
 			if (object instanceof IResource) {
 				return ((IResource) object).getLocation().toFile();
+			}
+
+			try {
+				if (object instanceof IJavaElement) {
+					return ((IJavaElement) object).getResource().getLocation().toFile();
+				}
+			} catch (NoClassDefFoundError e) {
+				// ignore
 			}
 
 			return null;
