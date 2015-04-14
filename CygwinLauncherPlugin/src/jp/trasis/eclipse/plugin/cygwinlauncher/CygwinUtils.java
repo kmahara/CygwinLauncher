@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -20,6 +21,7 @@ import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
 import org.eclipse.debug.ui.console.ConsoleColorProvider;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -189,6 +191,11 @@ public final class CygwinUtils {
 			return null;
 		}
 
+		if (selection instanceof ITextSelection) {
+			IFile file = (IFile) HandlerUtil.getActiveEditorInput(event).getAdapter(IFile.class);
+			return file.getRawLocation().toFile();
+		}
+
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection selection2 = (IStructuredSelection) selection;
 
@@ -197,6 +204,8 @@ public final class CygwinUtils {
 			if (object instanceof IResource) {
 				return ((IResource) object).getLocation().toFile();
 			}
+
+
 
 			try {
 				if (object instanceof IJavaElement) {
