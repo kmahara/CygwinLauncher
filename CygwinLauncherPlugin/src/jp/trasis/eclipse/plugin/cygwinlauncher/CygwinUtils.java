@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -184,7 +185,7 @@ public final class CygwinUtils {
 	 * @return
 	 * @throws ExecutionException
 	 */
-	public static File getFile(ExecutionEvent event) throws ExecutionException {
+	public static IResource getResource(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
 
 		if (selection == null || selection.isEmpty()) {
@@ -193,7 +194,7 @@ public final class CygwinUtils {
 
 		if (selection instanceof ITextSelection) {
 			IFile file = (IFile) HandlerUtil.getActiveEditorInput(event).getAdapter(IFile.class);
-			return file.getRawLocation().toFile();
+			return file;
 		}
 
 		if (selection instanceof IStructuredSelection) {
@@ -202,14 +203,12 @@ public final class CygwinUtils {
 			Object object =  selection2.getFirstElement();
 
 			if (object instanceof IResource) {
-				return ((IResource) object).getLocation().toFile();
+				return (IResource) object;
 			}
-
-
 
 			try {
 				if (object instanceof IJavaElement) {
-					return ((IJavaElement) object).getResource().getLocation().toFile();
+					return ((IJavaElement) object).getResource();
 				}
 			} catch (NoClassDefFoundError e) {
 				// ignore
@@ -223,7 +222,39 @@ public final class CygwinUtils {
 
 			FileEditorInput input = (FileEditorInput) editorPart.getEditorInput();
 
-			return input.getFile().getLocation().toFile();
+			return input.getFile();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get current selected file or folder.
+	 *
+	 * @return
+	 * @throws ExecutionException
+	 */
+	public static File getFile(ExecutionEvent event) throws ExecutionException {
+		IResource resource = getResource(event);
+
+		if (resource != null) {
+			return resource.getLocation().toFile();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get current selected project.
+	 *
+	 * @return
+	 * @throws ExecutionException
+	 */
+	public static IProject getProject(ExecutionEvent event) throws ExecutionException {
+		IResource resource = getResource(event);
+
+		if (resource != null) {
+			return resource.getProject();
 		}
 
 		return null;
